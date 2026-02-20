@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FixMyArea - Sign Up</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Reset & typography */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #0a2342, #1e3f66);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .login-container {
+      width: 100%;
+      max-width: 450px;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      padding: 35px 30px;
+      text-align: center;
+    }
+
+    .login-card .logo {
+      width: 120px;
+      height: auto;
+      margin-bottom: 20px;
+    }
+
+    .login-card h2 {
+      color: #0a2342;
+      margin-bottom: 25px;
+      font-weight: 600;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      text-align: left;
+    }
+
+    label {
+      font-size: 14px;
+      color: #333333;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"], 
+    input[type="email"], 
+    input[type="password"] {
+      padding: 12px;
+      border: 1px solid #cccccc;
+      border-radius: 8px;
+      font-size: 14px;
+      width: 100%;
+      transition: border 0.3s;
+    }
+
+    input:focus {
+      border-color: #0a2342;
+      outline: none;
+    }
+
+    .primary-btn {
+      background: #0a2342;
+      color: #ffffff;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+      margin-top: 10px;
+    }
+
+    .primary-btn:hover {
+      background: #1e3f66;
+      transform: translateY(-2px);
+    }
+
+    .signin-link {
+      font-size: 13px;
+      color: #777777;
+      margin-top: 12px;
+      text-align: center;
+    }
+
+    .signin-link a {
+      color: #0a2342;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .signin-link a:hover {
+      text-decoration: underline;
+    }
+
+    .password-note {
+      font-size: 11px;
+      color: #555555;
+      margin-top: -10px;
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-card">
+      <img src="images/logo.svg" alt="Logo" class="logo">
+      <h2>Create Your Account</h2>
+      <form onsubmit="event.preventDefault(); window.location.href='dashboard.html';">
+        <label>Full Name</label>
+        <input type="text" placeholder="Your Full Name" required>
+
+        <label>Aadhaar / Driving License</label>
+        <input type="text" placeholder="XXXX XXXX 1234" maxlength="20" required>
+
+        <label>Email Address</label>
+        <input type="email" placeholder="you@example.com" required>
+
+        <label>Create Password</label>
+        <input type="password" placeholder="Enter Password" required>
+        <p class="password-note">Use at least 8 characters, including letters and numbers.</p>
+
+        <label>Confirm Password</label>
+        <input type="password" placeholder="Re-enter Password" required>
+
+        <button type="submit" class="primary-btn">Sign Up</button>
+      </form>
+      <p class="signin-link">Already have an account? <a href="index.html">Sign In</a></p>
+    </div>
+  </div>
+</body>
+</html>

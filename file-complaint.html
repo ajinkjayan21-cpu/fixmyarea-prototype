@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FixMyArea - File Complaint</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+  body { margin:0; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:#f4f6f8; }
+  
+  /* Top Bar */
+  .top-bar { position:fixed; top:0; left:0; width:100%; height:60px; background:#0a2342; color:#fff; display:flex; justify-content:space-between; align-items:center; padding:0 20px; box-shadow:0 2px 10px rgba(0,0,0,0.2); z-index:1000; }
+  .top-bar .logo { height:40px; }
+  .top-bar .top-right { display:flex; align-items:center; gap:15px; }
+  .top-bar .profile { cursor:pointer; padding:5px 10px; border-radius:6px; display:flex; align-items:center; gap:8px; transition:background 0.3s; }
+  .top-bar .profile:hover { background:rgba(255,255,255,0.2); }
+  .profile img { width:32px; height:32px; border-radius:50%; }
+
+  /* Main Content */
+  .main-content { margin-top:80px; padding:30px 20px; max-width:900px; margin-left:auto; margin-right:auto; }
+  h1 { color:#0a2342; margin-bottom:25px; text-align:center; }
+
+  /* Form Card */
+  .complaint-form { background:#fff; padding:30px; border-radius:14px; box-shadow:0 6px 18px rgba(0,0,0,0.1); display:flex; flex-direction:column; gap:20px; }
+  .complaint-form label { font-weight:600; color:#0a2342; margin-bottom:5px; display:block; }
+  .complaint-form input[type="text"],
+  .complaint-form select,
+  .complaint-form textarea,
+  .complaint-form input[type="file"] { width:100%; padding:12px 15px; border-radius:8px; border:1px solid #ccc; transition:border 0.3s; }
+  .complaint-form input:focus, .complaint-form select:focus, .complaint-form textarea:focus { border:2px solid #0a2342; outline:none; }
+
+  textarea { resize:none; height:100px; }
+
+  .checkbox { display:flex; align-items:center; gap:10px; font-weight:500; }
+  
+  .primary-btn {
+    background: linear-gradient(135deg,#0a2342,#1e3f66);
+    color:#fff; border:none; padding:15px 20px; border-radius:12px;
+    font-weight:600; cursor:pointer; transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .primary-btn:hover { transform:translateY(-3px); box-shadow:0 8px 20px rgba(0,0,0,0.2); }
+
+  .map-container { position:relative; width:100%; height:300px; border-radius:12px; overflow:hidden; margin-bottom:15px; }
+
+  .privacy { margin-top:10px; font-size:14px; color:#555; }
+
+  /* Priority Badge */
+  .priority { display:inline-block; padding:5px 10px; border-radius:8px; font-weight:600; color:#fff; font-size:12px; }
+
+  .high { background:#ff4d4f; }
+  .medium { background:#ffa500; }
+  .low { background:#52c41a; }
+
+  /* SOS Toggle */
+  .sos-btn { background:#ff4d4f; color:#fff; padding:10px 15px; border:none; border-radius:12px; font-weight:600; cursor:pointer; margin-top:10px; transition:transform 0.3s; }
+  .sos-btn:hover { transform:translateY(-2px); box-shadow:0 5px 15px rgba(0,0,0,0.2); }
+
+  @media(max-width:600px){
+    .main-content { padding:20px 15px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top-bar">
+  <img src="images/logo.svg" class="logo">
+  <div class="top-right">
+    <span class="notification" title="Notifications">🔔</span>
+    <div class="profile">
+      <img src="images/profile-placeholder.png" alt="Profile Pic">
+      <span>John D**** ▼</span>
+    </div>
+  </div>
+</header>
+
+<main class="main-content">
+  <h1>File a Complaint</h1>
+  <form class="complaint-form" onsubmit="event.preventDefault(); alert('Complaint Submitted! (UI simulation)');">
+    
+    <label>Category <span class="priority high" id="priority-badge">High</span></label>
+    <select id="category" onchange="updatePriority()">
+      <option value="traffic">Traffic</option>
+      <option value="corruption">Corruption</option>
+      <option value="public">Public Safety</option>
+      <option value="harassment">Harassment</option>
+      <option value="infrastructure">Infrastructure</option>
+    </select>
+
+    <label>Description</label>
+    <textarea placeholder="Describe the issue in detail"></textarea>
+
+    <label>Upload Image / Video</label>
+    <input type="file" multiple>
+
+    <label>Location</label>
+    <input type="text" placeholder="Auto-detected location">
+    
+    <div class="map-container">
+      <!-- Google Map Embed -->
+      <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.178857213735!2d75.81909727466986!3d11.014093792103518!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba42231b1cdd06b%3A0x421fbca6e67d1b92!2sKochi!5e0!3m2!1sen!2sin!4v1676901234567!5m2!1sen!2sin" 
+        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+    
+    <button type="button" class="sos-btn">Mark as High Priority / SOS</button>
+
+    <div class="checkbox">
+      <input type="checkbox" id="anonymous">
+      <label for="anonymous">Report Anonymously</label>
+    </div>
+
+    <button type="submit" class="primary-btn">Submit Complaint</button>
+  </form>
+  <p class="privacy">Your exact location is hidden for safety. (UI simulation)</p>
+</main>
+
+<script>
+  function updatePriority() {
+    const category = document.getElementById('category').value;
+    const badge = document.getElementById('priority-badge');
+    if(category==='harassment'||category==='public'){ badge.textContent='High'; badge.className='priority high'; }
+    else if(category==='traffic'||category==='corruption'){ badge.textContent='Medium'; badge.className='priority medium'; }
+    else{ badge.textContent='Low'; badge.className='priority low'; }
+  }
+</script>
+</body>
+</html>

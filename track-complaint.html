@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FixMyArea - Track Complaint</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+  body { margin:0; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:#f4f6f8; display:flex; }
+
+  /* Sidebar */
+  .sidebar {
+    width:220px;
+    background:#1e3f66;
+    padding-top:20px;
+    height:100vh;
+    position:fixed;
+  }
+  .sidebar ul { list-style:none; padding:0; }
+  .sidebar ul li { margin:10px 0; }
+  .sidebar ul li a {
+    display:block; color:#fff; text-decoration:none; padding:12px 20px; border-radius:6px;
+    transition: background 0.3s, transform 0.2s;
+  }
+  .sidebar ul li a:hover { background:#0a2342; transform:translateX(5px); }
+  .sidebar ul li a.active { background:#ff6b6b; }
+
+  /* Top Bar */
+  .top-bar {
+    position:fixed; top:0; left:220px; width:calc(100% - 220px); height:60px;
+    background:#0a2342; color:#fff; display:flex; justify-content:space-between; align-items:center; padding:0 20px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.2); z-index:1000;
+  }
+  .top-bar .logo { height:40px; }
+  .top-bar .top-right { display:flex; align-items:center; gap:15px; }
+  .top-bar .profile { cursor:pointer; padding:5px 10px; border-radius:6px; display:flex; align-items:center; gap:8px; transition:background 0.3s; }
+  .top-bar .profile:hover { background:rgba(255,255,255,0.2); }
+  .profile img { width:32px; height:32px; border-radius:50%; }
+
+  /* Main Content */
+  .main-content { margin-left:220px; margin-top:80px; padding:30px; width:calc(100% - 220px); }
+  h1 { color:#0a2342; margin-bottom:25px; text-align:center; }
+
+  form { display:flex; gap:15px; margin-bottom:30px; flex-wrap:wrap; align-items:center; justify-content:center; }
+  form input { padding:10px; border-radius:8px; border:1px solid #ccc; width:200px; }
+  .primary-btn { background: linear-gradient(135deg,#0a2342,#1e3f66); color:#fff; border:none; padding:12px 20px; border-radius:12px; font-weight:600; cursor:pointer; transition: transform 0.3s, box-shadow 0.3s; }
+  .primary-btn:hover { transform:translateY(-3px); box-shadow:0 8px 20px rgba(0,0,0,0.2); }
+
+  /* Timeline Card */
+  .timeline-card {
+    background:#fff; padding:25px; border-radius:14px; box-shadow:0 6px 18px rgba(0,0,0,0.1);
+    max-width:900px; margin:0 auto; display:flex; flex-direction:column; gap:20px;
+  }
+  .timeline-card h3 { color:#0a2342; margin-bottom:15px; text-align:center; }
+
+  .timeline { list-style:none; padding:0; display:flex; justify-content:space-between; }
+  .timeline li { flex:1; text-align:center; padding:10px; border-radius:10px; background:#f0f0f0; position:relative; font-weight:600; transition: background 0.3s; }
+  .timeline li::after { content:""; position:absolute; width:100%; height:4px; background:#ccc; top:50%; left:50%; z-index:-1; transform:translate(-50%, -50%); }
+  .timeline li:first-child::after { left:50%; width:50%; }
+  .timeline li:last-child::after { width:50%; left:0; }
+  .timeline li.completed { background:#52c41a; color:#fff; }
+  .timeline li.inprogress { background:#ffa500; color:#fff; }
+
+  /* Info Sections */
+  .info { display:flex; gap:20px; flex-wrap:wrap; justify-content:center; }
+  .info .card { background:#f9f9f9; padding:15px 20px; border-radius:12px; flex:1 1 200px; text-align:center; box-shadow:0 4px 12px rgba(0,0,0,0.05); }
+  .info .card h4 { margin-bottom:8px; color:#0a2342; }
+  .info .card p { font-weight:600; }
+
+  /* Map */
+  .map-container { width:100%; height:300px; border-radius:12px; overflow:hidden; }
+  .map-container iframe { width:100%; height:100%; border:0; }
+
+  /* Chat Simulation */
+  .chat-card { background:#fff; padding:20px; border-radius:14px; box-shadow:0 4px 15px rgba(0,0,0,0.1); margin-top:20px; }
+  .chat-card h4 { margin-bottom:15px; color:#0a2342; }
+  .chat-messages { display:flex; flex-direction:column; gap:10px; }
+  .chat-message { background:#f0f0f0; padding:10px 15px; border-radius:12px; max-width:300px; }
+  .chat-message.user { background:#1e3f66; color:#fff; align-self:flex-end; }
+  .download-btn { background:#ff6b6b; color:#fff; padding:10px 15px; border:none; border-radius:12px; font-weight:600; cursor:pointer; margin-top:10px; }
+</style>
+</head>
+<body>
+
+<aside class="sidebar">
+  <ul>
+    <li><a href="dashboard.html">Dashboard</a></li>
+    <li><a href="file-complaint.html">File Complaint</a></li>
+    <li><a href="track-complaint.html" class="active">Track Complaint</a></li>
+    <li><a href="history.html">Complaint History</a></li>
+    <li><a href="heatmap.html">Heatmap</a></li>
+    <li><a href="file-complaint.html#sos">Emergency Report</a></li>
+    <li><a href="e-result.html">E-Result</a></li>
+    <li><a href="#">Settings</a></li>
+  </ul>
+</aside>
+
+<header class="top-bar">
+  <img src="images/logo.svg" class="logo">
+  <div class="top-right">
+    <span class="notification" title="Notifications">🔔</span>
+    <div class="profile">
+      <img src="images/profile-placeholder.png" alt="Profile Pic">
+      <span>John D**** ▼</span>
+    </div>
+  </div>
+</header>
+
+<main class="main-content">
+  <h1>Track Complaint</h1>
+
+  <form onsubmit="event.preventDefault(); alert('Complaint Searched (UI simulation)');">
+    <input type="text" placeholder="CMP2026001" required>
+    <button type="submit" class="primary-btn">Search</button>
+  </form>
+
+  <div class="timeline-card">
+    <h3>Complaint Status Timeline</h3>
+    <ul class="timeline">
+      <li class="completed">Submitted ✔</li>
+      <li class="completed">Under Review ✔</li>
+      <li class="inprogress">Officer Assigned ⏳</li>
+      <li class="inprogress">In Progress ⏳</li>
+      <li>Resolved ❌</li>
+    </ul>
+
+    <div class="info">
+      <div class="card">
+        <h4>Category</h4>
+        <p>Traffic</p>
+      </div>
+      <div class="card">
+        <h4>Priority</h4>
+        <p>High</p>
+      </div>
+      <div class="card">
+        <h4>Submitted On</h4>
+        <p>18-Feb-2026</p>
+      </div>
+      <div class="card">
+        <h4>Assigned Officer</h4>
+        <p>Officer R****</p>
+      </div>
+    </div>
+
+    <div class="map-container">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.178857213735!2d75.81909727466986!3d11.014093792103518!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba42231b1cdd06b%3A0x421fbca6e67d1b92!2sKochi!5e0!3m2!1sen!2sin!4v1676901234567!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+
+    <div class="chat-card">
+      <h4>Message with Officer (UI Simulation)</h4>
+      <div class="chat-messages">
+        <div class="chat-message">Please provide additional images.</div>
+        <div class="chat-message user">Uploaded the requested images.</div>
+        <div class="chat-message">Officer will review soon.</div>
+      </div>
+      <button class="download-btn">Download Complaint Report</button>
+    </div>
+  </div>
+</main>
+
+</body>
+</html>

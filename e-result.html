@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FixMyArea - E-Result</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body {
+      margin:0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display:flex;
+      background:#f4f6f8;
+    }
+
+    /* Top bar */
+    .top-bar {
+      position: fixed; top:0; left:0; width:100%; height:60px;
+      background:#0a2342; color:#fff; display:flex; justify-content:space-between; align-items:center;
+      padding:0 20px; box-shadow:0 2px 10px rgba(0,0,0,0.2); z-index:1000;
+    }
+    .top-bar .logo { height:40px; }
+    .top-bar .top-right { display:flex; align-items:center; gap:15px; }
+    .top-bar .profile img { width:32px; height:32px; border-radius:50%; margin-right:5px; }
+
+    /* Sidebar */
+    .sidebar { position: fixed; top:60px; left:0; width:220px; height:100%; background:#1e3f66; padding-top:20px; }
+    .sidebar ul { list-style:none; padding:0; }
+    .sidebar ul li { margin:10px 0; }
+    .sidebar ul li a { display:block; padding:12px 20px; color:#fff; text-decoration:none; border-radius:6px; transition:0.3s; }
+    .sidebar ul li a:hover { background:#0a2342; transform:translateX(5px); }
+    .sidebar ul li a.active { background:#ff6b6b; }
+
+    /* Main content */
+    .main-content { margin-left:220px; padding:90px 30px 30px 30px; width:calc(100% - 220px); }
+    .main-content h1 { color:#0a2342; margin-bottom:25px; }
+
+    /* Result cards */
+    .result-container { display:flex; flex-wrap:wrap; gap:20px; }
+    .result-card {
+      background:#fff; flex:1 1 350px;
+      padding:20px; border-radius:12px;
+      box-shadow:0 5px 15px rgba(0,0,0,0.1);
+      transition:transform 0.3s, box-shadow 0.3s;
+    }
+    .result-card:hover { transform:translateY(-5px); box-shadow:0 10px 25px rgba(0,0,0,0.15); }
+
+    .result-card h3 { margin-top:0; color:#0a2342; }
+    .result-card p { margin:6px 0; color:#333; }
+    .result-card .status {
+      display:inline-block; padding:5px 10px; border-radius:8px;
+      font-weight:600; color:#fff; margin-bottom:10px;
+    }
+    .status.resolved { background:#28a745; }
+    .status.pending { background:#ffc107; }
+    .status.in-progress { background:#17a2b8; }
+
+    .download-btn {
+      display:inline-block; margin-top:10px;
+      background:#0a2342; color:#fff; padding:10px 15px;
+      border:none; border-radius:8px;
+      cursor:pointer; font-weight:600;
+      transition:0.3s;
+      text-decoration:none;
+    }
+    .download-btn:hover { background:#1e3f66; transform:scale(1.05); }
+
+    .stars { color:#ffbf00; }
+  </style>
+</head>
+<body>
+  <header class="top-bar">
+    <img src="images/logo.svg" class="logo">
+    <div class="top-right">
+      <span class="notification">🔔</span>
+      <div class="profile"><img src="images/fake-profile.png" alt="profile"> Alex R**** ▼</div>
+    </div>
+  </header>
+
+  <aside class="sidebar">
+    <ul>
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="file-complaint.html">File Complaint</a></li>
+      <li><a href="track-complaint.html">Track Complaint</a></li>
+      <li><a href="history.html">Complaint History</a></li>
+      <li><a href="heatmap.html">Heatmap</a></li>
+      <li><a href="file-complaint.html#sos">Emergency Report</a></li>
+      <li><a href="e-result.html" class="active">E-Result</a></li>
+      <li><a href="#">Settings</a></li>
+    </ul>
+  </aside>
+
+  <main class="main-content">
+    <h1>Complaint Resolution Summary</h1>
+
+    <div class="result-container">
+
+      <div class="result-card">
+        <span class="status resolved">Resolved</span>
+        <h3>Complaint ID: CMP2026001</h3>
+        <p><b>Category:</b> Traffic</p>
+        <p><b>Resolution:</b> Streetlight wiring replaced and tested successfully</p>
+        <p><b>Closure Date:</b> 20 Feb 2026</p>
+        <p><b>Officer Signature:</b> Officer R****</p>
+        <p><b>User Satisfaction:</b> <span class="stars">★★★★☆</span></p>
+        <a href="#" class="download-btn">Download Report (UI Only)</a>
+      </div>
+
+      <div class="result-card">
+        <span class="status in-progress">In Progress</span>
+        <h3>Complaint ID: CMP2026002</h3>
+        <p><b>Category:</b> Garbage</p>
+        <p><b>Resolution:</b> Pending inspection</p>
+        <p><b>Closure Date:</b> —</p>
+        <p><b>Officer Signature:</b> Officer K****</p>
+        <p><b>User Satisfaction:</b> <span class="stars">★★★☆☆</span></p>
+        <a href="#" class="download-btn">Download Report (UI Only)</a>
+      </div>
+
+      <div class="result-card">
+        <span class="status pending">Pending</span>
+        <h3>Complaint ID: CMP2026003</h3>
+        <p><b>Category:</b> Infrastructure</p>
+        <p><b>Resolution:</b> Awaiting materials</p>
+        <p><b>Closure Date:</b> —</p>
+        <p><b>Officer Signature:</b> Officer S****</p>
+        <p><b>User Satisfaction:</b> <span class="stars">★★☆☆☆</span></p>
+        <a href="#" class="download-btn">Download Report (UI Only)</a>
+      </div>
+
+    </div>
+  </main>
+</body>
+</html>
